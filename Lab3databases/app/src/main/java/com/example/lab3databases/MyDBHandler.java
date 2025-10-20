@@ -12,7 +12,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_PRODUCT_NAME = "name";
     private static final String COLUMN_PRODUCT_PRICE = "price";
     private static final String DATABASE_NAME = "products.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2; // Incremented to force an upgrade
 
     public MyDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -45,48 +45,67 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_PRODUCT_NAME, product.getProductName());
         values.put(COLUMN_PRODUCT_PRICE, product.getProductPrice());
         db.insert(TABLE_NAME, null, values);
-        db.close();
+        // DO NOT CLOSE THE DATABASE HERE
     }
 
-    /**
-     * Finds a product in the database by its name
-     * @return A product object if found, otherwise null
-     */
     public Product findProduct(String productName) {
-        SQLiteDatabase db = this.getReadableDatabase(); // Opens the databases and makes it read only
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_PRODUCT_NAME + " = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{productName});  // Returns a cursor of the product
-        Product product = null;  // Initialize product to null
+        Cursor cursor = db.rawQuery(query, new String[]{productName});
+        Product product = null;
 
         if (cursor.moveToFirst()) {
-            // Use getColumnIndexOrThrow to get the index of the column
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID));
             String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PRODUCT_NAME));
             double price = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_PRODUCT_PRICE));
             product = new Product(id, name, price);
         }
         cursor.close();
-        db.close();
+        // DO NOT CLOSE THE DATABASE HERE
         return product;
     }
-    /**
-     * Deletes a product from the database by its name
-     * Uses the safe db.delete() method
-     * @return True if the product was deleted, otherwise false
-     */
+
+    public Product findProductByPrice(double price) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_PRODUCT_PRICE + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(price)});
+        Product product = null;
+
+        if (cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PRODUCT_NAME));
+            double productPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_PRODUCT_PRICE));
+            product = new Product(id, name, productPrice);
+        }
+        cursor.close();
+        return product;
+    }
+
+    public Product findProductByNameAndPrice(String productName, double price) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_PRODUCT_NAME + " = ? AND " + COLUMN_PRODUCT_PRICE + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{productName, String.valueOf(price)});
+        Product product = null;
+
+        if (cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PRODUCT_NAME));
+            double productPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_PRODUCT_PRICE));
+            product = new Product(id, name, productPrice);
+        }
+        cursor.close();
+        return product;
+    }
 
     public boolean deleteProduct(String productName) {
         boolean result = false;
-        SQLiteDatabase db = this.getWritableDatabase(); //gets the writable database
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        // The '?' prevents SQl injection
-        // the delete method returns the number of rows affected
         int rowsDeleted = db.delete(TABLE_NAME, COLUMN_PRODUCT_NAME + " = ?", new String[]{productName});
         if (rowsDeleted > 0) {
             result = true;
         }
-        db.close();
+        // DO NOT CLOSE THE DATABASE HERE
         return result;
-
     }
 }
