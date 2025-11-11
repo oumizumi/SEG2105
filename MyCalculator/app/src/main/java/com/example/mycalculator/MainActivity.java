@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView text_display;
 
     // This is to evaluate the math expression
+    Evaluate e = new Evaluate();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 addNumber("-");
                 break;
             case R.id.button12:
-                addNumber("x");
+                addNumber("*");
                 break;
             case R.id.button16:
                 addNumber("/");
@@ -131,10 +132,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private String evaluate(String expression) throws Exception {
-        expression = expression.replace("x", "*");
-        Expression e = new ExpressionBuilder(expression).build();
-        double result = e.evaluate();
-        BigDecimal decimal = new BigDecimal(result);
+
+        BigDecimal decimal = e.evaluate(expression);
         return decimal.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
     }
 
