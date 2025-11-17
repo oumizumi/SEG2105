@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A1A1A"
+    tools:context=".ProfileActivity">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/selectAvatarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a new avatar"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.05"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="48dp" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/selectAvatarSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your team's flag"
+        android:textSize="14sp"
+        android:textColor="#B0B0B0"
+        android:fontFamily="sans-serif-light"
+        app:layout_constraintTop_toBottomOf="@id/selectAvatarTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- TableLayout with 3x3 Grid of Flags -->
+    <TableLayout
+        android:id="@+id/flagTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        app:layout_constraintTop_toBottomOf="@id/selectAvatarSubtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="48dp"
+        android:padding="16dp">
+
+        <!-- Row 1 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A"
+                android:layout_marginEnd="12dp">
+                <ImageView
+                    android:id="@+id/flagid00"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_ca"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="Canada Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A"
+                android:layout_marginEnd="12dp">
+                <ImageView
+                    android:id="@+id/flagid01"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_eg"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="Egypt Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A">
+                <ImageView
+                    android:id="@+id/flagid02"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_fr"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="France Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+
+        <!-- Row 2 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A"
+                android:layout_marginEnd="12dp">
+                <ImageView
+                    android:id="@+id/flagid03"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_jp"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="Japan Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A"
+                android:layout_marginEnd="12dp">
+                <ImageView
+                    android:id="@+id/flagid04"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_kr"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="South Korea Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A">
+                <ImageView
+                    android:id="@+id/flagid05"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_sp"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="Spain Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+
+        <!-- Row 3 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A"
+                android:layout_marginEnd="12dp">
+                <ImageView
+                    android:id="@+id/flagid06"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_tr"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="Turkey Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A"
+                android:layout_marginEnd="12dp">
+                <ImageView
+                    android:id="@+id/flagid07"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_uk"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="UK Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#2A2A2A">
+                <ImageView
+                    android:id="@+id/flagid08"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/flag_us"
+                    android:onClick="SetTeamIcon"
+                    android:contentDescription="USA Flag"
+                    android:scaleType="centerCrop"
+                    android:padding="8dp"
+                    tools:ignore="OnClick" />
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
